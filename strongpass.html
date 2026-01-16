@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strong Passwords - CyberSecure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Montserrat", system-ui, -apple-system, Arial, sans-serif;
+            background: linear-gradient(135deg, #010e17, #0a1f44);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            background: rgba(0, 198, 255, 0.2); border: 2px solid #00c6ff;
+            color: #00c6ff; padding: 12px 20px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            background: #00c6ff; color: #010e17; transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+        }
+        .module-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 60px;
+        }
+        .module-title {
+            font-size: 3rem; font-weight: 900; color: #fff;
+            text-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            margin-bottom: 10px; letter-spacing: 2px;
+        }
+        .module-subtitle {
+            font-size: 1.2rem; color: #00c6ff; font-weight: 600; opacity: 0.9;
+        }
+        .password-grid {
+            display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 50px;
+        }
+        .password-card {
+            background: rgba(255,255,255,0.07); border-radius: 15px; padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            min-width: 260px; max-width: 350px; flex: 1 1 260px;
+            border-top: 6px solid #00c6ff;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .password-icon {
+            font-size: 2.5rem; color: #00c6ff; margin-bottom: 15px;
+        }
+        .password-title {
+            font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: center;
+        }
+        .password-desc {
+            color: #e0f7ff; font-size: 1rem; text-align: center; line-height: 1.6;
+        }
+        .interactive-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .password-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border: 2px solid rgba(0, 198, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            margin: 20px 0;
+        }
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .strength-indicator {
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .password-strength {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        .strength-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        .strength-bar.weak { background: #dc3545; }
+        .strength-bar.medium { background: #ffc107; }
+        .strength-bar.strong { background: #28a745; }
+        .tips-section {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        .tips-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00c6ff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .tips-grid {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+        .tip-item {
+            background: rgba(0,198,255,0.13); border-radius: 10px; padding: 18px 22px;
+            color: #fff; font-weight: 600; min-width: 220px; box-shadow: 0 2px 8px rgba(0,198,255,0.09);
+            border-left: 4px solid #00c6ff; max-width: 350px; flex: 1 1 260px;
+        }
+        .tip-number {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #00c6ff;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 900px) {
+            .password-grid { flex-direction: column; align-items: center; }
+            .tips-grid { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <div class="container">
+        <div class="module-header">
+            <h1 class="module-title">Strong Passwords</h1>
+            <p class="module-subtitle">Build Your First Line of Defense</p>
+        </div>
+        <div class="password-grid">
+            <div class="password-card">
+                <div class="password-icon">🛡️</div>
+                <div class="password-title">Why Strong Passwords Matter</div>
+                <div class="password-desc">Passwords are your first line of defense against cyber attacks. Weak passwords can be cracked in seconds, while strong ones can take centuries.</div>
+            </div>
+            <div class="password-card">
+                <div class="password-icon">⚠️</div>
+                <div class="password-title">Common Password Mistakes</div>
+                <div class="password-desc">Using "123456", "password", or your name makes you an easy target. Reusing the same password across multiple sites means one breach exposes everything.</div>
+            </div>
+            <div class="password-card">
+                <div class="password-icon">🔑</div>
+                <div class="password-title">Password Best Practices</div>
+                <div class="password-desc">Use at least 12 characters with a mix of uppercase, lowercase, numbers, and symbols. Create unique passwords for each account.</div>
+            </div>
+            <div class="password-card">
+                <div class="password-icon">🔧</div>
+                <div class="password-title">Password Managers</div>
+                <div class="password-desc">Password managers like Bitwarden, 1Password, or Dashlane generate and store unique, complex passwords for all your accounts.</div>
+            </div>
+        </div>
+        <div class="interactive-section">
+            <h3 style="color: #00c6ff; margin-bottom: 20px; font-size: 1.8rem;">Test Your Password Strength</h3>
+            <input type="text" id="password-tester" class="password-input" placeholder="Enter a password to test its strength...">
+            <div id="strength-result" class="strength-indicator"></div>
+            <div class="password-strength" id="strength-bars">
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+            </div>
+        </div>
+        <div class="tips-section">
+            <h3 class="tips-title">Expert Password Tips</h3>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-number">Tip 1</div>
+                    <p>Use the "Three Random Words" method: combine three unrelated words like "Horse$Battery$Staple" for memorable yet secure passwords.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">Tip 2</div>
+                    <p>Enable two-factor authentication (2FA) wherever possible. Even if your password is compromised, 2FA provides an additional security layer.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">Tip 3</div>
+                    <p>Change passwords immediately if a service reports a data breach. Monitor haveibeenpwned.com to check if your accounts have been compromised.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">Tip 4</div>
+                    <p>Never share passwords via email, text, or phone calls. Legitimate companies will never ask for your password through these channels.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('password-tester');
+        const strengthResult = document.getElementById('strength-result');
+        const strengthBars = document.querySelectorAll('.strength-bar');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            updateStrengthDisplay(strength);
+        });
+
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score += 1;
+            if (password.length >= 12) score += 1;
+            if (/[a-z]/.test(password)) score += 1;
+            if (/[A-Z]/.test(password)) score += 1;
+            if (/[0-9]/.test(password)) score += 1;
+            if (/[^A-Za-z0-9]/.test(password)) score += 1;
+
+            if (password.length === 0) {
+                return { score: 0, text: 'Enter a password to test', color: '#666' };
+            } else if (score <= 2) {
+                return { score: 1, text: 'Very Weak - Easily cracked', color: '#dc3545' };
+            } else if (score <= 3) {
+                return { score: 2, text: 'Weak - Needs improvement', color: '#fd7e14' };
+            } else if (score <= 4) {
+                return { score: 3, text: 'Medium - Getting better', color: '#ffc107' };
+            } else if (score <= 5) {
+                return { score: 4, text: 'Strong - Well protected', color: '#28a745' };
+            } else {
+                return { score: 5, text: 'Very Strong - Excellent!', color: '#20c997' };
+            }
+        }
+
+        function updateStrengthDisplay(strength) {
+            strengthResult.textContent = strength.text;
+            strengthResult.style.color = strength.color;
+
+            strengthBars.forEach((bar, index) => {
+                if (index < strength.score) {
+                    bar.className = 'strength-bar ' + 
+                        (strength.score <= 1 ? 'weak' : 
+                         strength.score <= 3 ? 'medium' : 'strong');
+                } else {
+                    bar.className = 'strength-bar';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

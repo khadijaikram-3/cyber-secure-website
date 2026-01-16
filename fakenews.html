@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection - CyberSecure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Montserrat", system-ui, -apple-system, Arial, sans-serif;
+            background: linear-gradient(135deg, #010e17, #0a1f44);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            background: rgba(0, 198, 255, 0.2); border: 2px solid #00c6ff;
+            color: #00c6ff; padding: 12px 20px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            background: #00c6ff; color: #010e17; transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+        }
+        .module-header {
+            text-align: left;
+            margin-bottom: 40px;
+            padding-top: 60px;
+            border-left: 8px solid #00c6ff;
+            padding-left: 30px;
+        }
+        .module-title {
+            font-size: 3rem; font-weight: 900; color: #fff;
+            text-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            margin-bottom: 10px; letter-spacing: 2px;
+        }
+        .module-subtitle {
+            font-size: 1.2rem; color: #00c6ff; font-weight: 600; opacity: 0.9;
+        }
+        .timeline {
+            position: relative;
+            margin: 50px 0 60px 0;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00c6ff;
+            border-radius: 2px;
+        }
+        .timeline-step {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 40px;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -5px;
+            top: 0;
+            background: #00c6ff;
+            color: #010e17;
+            border-radius: 50%;
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,198,255,0.2);
+        }
+        .timeline-title {
+            font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 8px;
+        }
+        .timeline-desc {
+            color: #e0f7ff; font-size: 1rem; line-height: 1.6;
+        }
+        .compare-section {
+            background: rgba(0,198,255,0.08); border-radius: 15px; padding: 30px; margin: 40px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .compare-title {
+            color: #00c6ff; font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 20px;
+        }
+        .compare-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+        }
+        .compare-card {
+            background: rgba(255,255,255,0.07); border-radius: 10px; padding: 20px; border: 2px solid transparent;
+        }
+        .compare-card.safe { border-color: #28a745; }
+        .compare-card.fake { border-color: #dc3545; }
+        .compare-head {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;
+        }
+        .compare-text {
+            font-family: monospace; background: rgba(0,0,0,0.2); padding: 10px;
+            border-radius: 5px; margin-bottom: 10px; color: #fff;
+        }
+        .tips-section {
+            margin: 40px 0;
+        }
+        .tips-title {
+            color: #00c6ff; font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-align: center;
+        }
+        .tips-list {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+        .tip-item {
+            background: rgba(0,198,255,0.13); border-radius: 10px; padding: 18px 22px;
+            color: #fff; font-weight: 600; min-width: 220px; box-shadow: 0 2px 8px rgba(0,198,255,0.09);
+            border-left: 4px solid #00c6ff;
+        }
+        .warning-section {
+            background: rgba(220,53,69,0.1); border: 2px solid #dc3545;
+            border-radius: 15px; padding: 30px; margin: 40px 0; text-align: center;
+        }
+        .warning-title {
+            color: #dc3545; font-size: 1.3rem; font-weight: 800; margin-bottom: 15px;
+        }
+        .warning-list {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+        .warning-item {
+            background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 18px;
+            color: #fff; min-width: 180px; border-left: 4px solid #dc3545;
+        }
+        @media (max-width: 900px) {
+            .compare-grid { grid-template-columns: 1fr; }
+            .tips-list, .warning-list { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <div class="container">
+        <div class="module-header">
+            <h1 class="module-title">Fake News Detection</h1>
+            <p class="module-subtitle">Learn to spot misinformation and protect yourself online.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-step">
+                <div class="timeline-icon">1</div>
+                <div class="timeline-title">Question the Headline</div>
+                <div class="timeline-desc">Is it sensational, shocking, or too good to be true? Fake news often uses clickbait headlines to grab attention.</div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon">2</div>
+                <div class="timeline-title">Check the Source</div>
+                <div class="timeline-desc">Is the website reputable? Look for official news outlets or organizations. Beware of unknown or suspicious URLs.</div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon">3</div>
+                <div class="timeline-title">Verify the Evidence</div>
+                <div class="timeline-desc">Does the article provide facts, data, or quotes from experts? Fake news rarely cites credible sources.</div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon">4</div>
+                <div class="timeline-title">Fact-Check with Others</div>
+                <div class="timeline-desc">Search for the story on fact-checking sites or other trusted news platforms before sharing.</div>
+            </div>
+        </div>
+        <div class="compare-section">
+            <div class="compare-title">Compare: Real vs Fake News Example</div>
+            <div class="compare-grid">
+                <div class="compare-card safe">
+                    <div class="compare-head" style="color:#28a745;">REAL NEWS</div>
+                    <div class="compare-text">"World Health Organization releases new pandemic guidelines."</div>
+                    <div class="compare-text">"NASA confirms successful Mars rover landing."</div>
+                    <div style="color:#28a745;">Reported by multiple trusted sources</div>
+                </div>
+                <div class="compare-card fake">
+                    <div class="compare-head" style="color:#dc3545;">FAKE NEWS</div>
+                    <div class="compare-text">"NASA discovers aliens, keeps it secret!"</div>
+                    <div class="compare-text">"Chocolate cures all diseases, experts say."</div>
+                    <div style="color:#dc3545;">Sensational, unverified, or clickbait claims</div>
+                </div>
+            </div>
+        </div>
+        <div class="tips-section">
+            <div class="tips-title">Quick Tips to Detect Fake News</div>
+            <div class="tips-list">
+                <div class="tip-item">Look for spelling and grammar mistakes</div>
+                <div class="tip-item">Check the date of publication</div>
+                <div class="tip-item">Search for supporting evidence</div>
+                <div class="tip-item">Be skeptical of viral stories</div>
+                <div class="tip-item">Don’t share before verifying</div>
+            </div>
+        </div>
+        <div class="warning-section">
+            <div class="warning-title">Red Flags</div>
+            <div class="warning-list">
+                <div class="warning-item">No author or source listed</div>
+                <div class="warning-item">Emotional manipulation</div>
+                <div class="warning-item">Urgency to share or act fast</div>
+                <div class="warning-item">Old stories recycled as new</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

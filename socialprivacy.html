@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Privacy - CyberSecure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Montserrat", system-ui, -apple-system, Arial, sans-serif;
+            background: linear-gradient(135deg, #010e17, #0a1f44);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            background: rgba(0, 198, 255, 0.2); border: 2px solid #00c6ff;
+            color: #00c6ff; padding: 12px 20px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            background: #00c6ff; color: #010e17; transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+        }
+        .module-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 60px;
+        }
+        .module-title {
+            font-size: 3rem; font-weight: 900; color: #fff;
+            text-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            margin-bottom: 10px; letter-spacing: 2px;
+        }
+        .module-subtitle {
+            font-size: 1.2rem; color: #00c6ff; font-weight: 600; opacity: 0.9;
+        }
+        .privacy-grid {
+            display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 50px;
+        }
+        .privacy-card {
+            background: rgba(255,255,255,0.07); border-radius: 15px; padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            min-width: 260px; max-width: 350px; flex: 1 1 260px;
+            border-top: 6px solid #00c6ff;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .privacy-icon {
+            font-size: 2.5rem; color: #00c6ff; margin-bottom: 15px;
+        }
+        .privacy-title {
+            font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: center;
+        }
+        .privacy-desc {
+            color: #e0f7ff; font-size: 1rem; text-align: center; line-height: 1.6;
+        }
+        .habits-section {
+            background: rgba(0,198,255,0.08); border-radius: 15px; padding: 30px; margin: 40px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .habits-title {
+            color: #00c6ff; font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 20px;
+        }
+        .habits-list {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+        }
+        .habit-card {
+            background: rgba(255,255,255,0.07); border-radius: 10px; padding: 20px; border: 2px solid transparent;
+        }
+        .habit-card.safe { border-color: #28a745; }
+        .habit-card.unsafe { border-color: #dc3545; }
+        .habit-head {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;
+        }
+        .habit-text {
+            font-family: monospace; background: rgba(0,0,0,0.2); padding: 10px;
+            border-radius: 5px; margin-bottom: 10px; color: #fff;
+        }
+        .checklist-section {
+            margin: 40px 0;
+        }
+        .checklist-title {
+            color: #00c6ff; font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-align: center;
+        }
+        .checklist-list {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+        .checklist-item {
+            background: rgba(0,198,255,0.13); border-radius: 10px; padding: 18px 22px;
+            color: #fff; font-weight: 600; min-width: 220px; box-shadow: 0 2px 8px rgba(0,198,255,0.09);
+            border-left: 4px solid #00c6ff;
+        }
+        .risks-section {
+            background: rgba(220,53,69,0.1); border: 2px solid #dc3545;
+            border-radius: 15px; padding: 30px; margin: 40px 0; text-align: center;
+        }
+        .risks-title {
+            color: #dc3545; font-size: 1.3rem; font-weight: 800; margin-bottom: 15px;
+        }
+        .risks-list {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+        .risk-item {
+            background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 18px;
+            color: #fff; min-width: 180px; border-left: 4px solid #dc3545;
+        }
+        @media (max-width: 900px) {
+            .privacy-grid { flex-direction: column; align-items: center; }
+            .habits-list { grid-template-columns: 1fr; }
+            .checklist-list, .risks-list { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <div class="container">
+        <div class="module-header">
+            <h1 class="module-title">Social Media Privacy</h1>
+            <p class="module-subtitle">Take control of your digital footprint and stay safe online.</p>
+        </div>
+        <div class="privacy-grid">
+            <div class="privacy-card">
+                <div class="privacy-icon">🔒</div>
+                <div class="privacy-title">Set Your Profile to Private</div>
+                <div class="privacy-desc">Limit who can see your posts, stories, and personal info. Review privacy settings on every platform you use.</div>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">🙈</div>
+                <div class="privacy-title">Think Before You Share</div>
+                <div class="privacy-desc">Avoid posting your address, phone number, or travel plans. Even photos can reveal more than you intend.</div>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">👥</div>
+                <div class="privacy-title">Accept Requests Carefully</div>
+                <div class="privacy-desc">Only connect with people you know. Fake accounts can be used to gather your data or scam you.</div>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">🛡️</div>
+                <div class="privacy-title">Enable Security Features</div>
+                <div class="privacy-desc">Use strong, unique passwords and enable two-factor authentication (2FA) for all your social accounts.</div>
+            </div>
+        </div>
+        <div class="habits-section">
+            <div class="habits-title">Safe vs Unsafe Social Media Habits</div>
+            <div class="habits-list">
+                <div class="habit-card safe">
+                    <div class="habit-head" style="color:#28a745;">SAFE HABITS</div>
+                    <div class="habit-text">Profile set to "Friends Only"</div>
+                    <div class="habit-text">No personal info in bio</div>
+                    <div style="color:#28a745;">Protects privacy and limits exposure</div>
+                </div>
+                <div class="habit-card unsafe">
+                    <div class="habit-head" style="color:#dc3545;">UNSAFE HABITS</div>
+                    <div class="habit-text">Public profile with address listed</div>
+                    <div class="habit-text">Accepting friend requests from strangers</div>
+                    <div style="color:#dc3545;">Increases risk of scams and data theft</div>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-section">
+            <div class="checklist-title">Social Media Privacy Checklist</div>
+            <div class="checklist-list">
+                <div class="checklist-item">Set profiles to private</div>
+                <div class="checklist-item">Limit personal info in your posts and bio</div>
+                <div class="checklist-item">Accept requests only from people you know</div>
+                <div class="checklist-item">Use strong passwords & 2FA</div>
+                <div class="checklist-item">Think before you post</div>
+                <div class="checklist-item">Report suspicious activity</div>
+            </div>
+        </div>
+        <div class="risks-section">
+            <div class="risks-title">Privacy Risks to Watch For</div>
+            <div class="risks-list">
+                <div class="risk-item">Oversharing personal info</div>
+                <div class="risk-item">Phishing links in messages</div>
+                <div class="risk-item">Fake profiles and scams</div>
+                <div class="risk-item">Unsecured accounts</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
